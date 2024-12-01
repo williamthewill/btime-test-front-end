@@ -40,7 +40,7 @@ const TASKS_PAGINATED = gql`
 
 
 const KanbanColumns = ({ columnsMap, search, filter }: { columnsMap: Array<[string, string]>, search: string, filter: { target: string, value: string } }) => {
-    let { data, loading, error, fetchMore, refetch } = useQuery(TASKS_PAGINATED, { variables: { first: 1 } });
+    let { data, loading, error, fetchMore, refetch } = useQuery(TASKS_PAGINATED, { variables: { first: 10 } });
 
     useEffect(() => {
         if (search !== '')
@@ -64,7 +64,6 @@ const KanbanColumns = ({ columnsMap, search, filter }: { columnsMap: Array<[stri
                 isFilter: true
             })
         else {
-            console.log("banana")
             refetch({
                 isSearch: false,
                 isFilter: false
