@@ -15,8 +15,8 @@ type tasks = {
 
 
 const TASKS_PAGINATED = gql`
-        query TasksPaginated($first: Int, $after: String, $substring: String){
-          getPaginated(first: $first, after: $after, substring: $substring) {
+        query TasksPaginated($first: Int, $after: String, $substring: String, $filter: String, $toCombine: String, $isSearch: Boolean, $isFilter: Boolean){
+          getPaginated(first: $first, after: $after, substring: $substring, filter: $filter, toCombine: $toCombine, isSearch: $isSearch, isFilter: $isFilter) {
             pageInfo {
               endCursor
               hasNextPage
@@ -39,20 +39,38 @@ const TASKS_PAGINATED = gql`
       `;
 
 
-const KanbanColumns = ({ columnsMap, search }: { columnsMap: Array<[string, string]>, search: string }) => {
-    let { data, loading, error, fetchMore, refetch } = useQuery(TASKS_PAGINATED, { variables: { first: 1, after: null } });
+const KanbanColumns = ({ columnsMap, search, filter }: { columnsMap: Array<[string, string]>, search: string, filter: { target: string, value: string } }) => {
+    let { data, loading, error, fetchMore, refetch } = useQuery(TASKS_PAGINATED, { variables: { first: 1 } });
 
     useEffect(() => {
         if (search !== '')
             refetch({
                 substring: search,
+                isSearch: true
             })
         else
             refetch({
-                first: 1,
+                isSearch: false,
+                isFilter: false
             })
 
     }, [search])
+
+    useEffect(() => {
+        if (filter.target !== "" && filter.value !== "")
+            refetch({
+                filter: filter.target,
+                toCombine: filter.value,
+                isFilter: true
+            })
+        else {
+            console.log("banana")
+            refetch({
+                isSearch: false,
+                isFilter: false
+            })
+        }
+    }, [filter])
 
     if (error) {
         console.log(error)

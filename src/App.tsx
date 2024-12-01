@@ -41,26 +41,18 @@ const classNames = (...classes: any) => {
 const App = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [search, setSearch] = useState('')
+  const [filter, setFilter] = useState({ target: '', value: '' })
 
   const handleChange = (e: any) => {
-    // const filteradTasks = findCard(e.target.value);
     setSearch(e.target.value)
-    // setTasksByColumns(groupedTasks)
   };
 
-  // const findCard = (substring: string) => {
-  //   const result = filterCardHook().searchBy(tasks, substring);
-  //   return result
-  // }
-
   const handleFilterSelected = ([target, value]: [string, string]) => {
-    // const result = filterCardHook().filterBy(tasks, target, value)
-    // const groupedTasks = TasksHook().groupByExecutionStatus(result)
-    // setTasksByColumns(groupedTasks)
+    setFilter({ target, value })
   }
 
   const resetFilter = () => {
-    // setTasksByColumns(groupedTasks)
+    setFilter({ target: '', value: '' })
   }
 
   return (
@@ -219,7 +211,7 @@ const App = () => {
           </div>
 
           <main className="overflow-hidden fixed bottom-0 left-20 top-16 w-3/4 border-r border-gray-200 px-4 py-6 sm:px-6 lg:px-8 xl:block">
-            <KanbanBoard search={search} />
+            <KanbanBoard search={search} filter={filter} />
           </main>
         </div>
 
