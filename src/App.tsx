@@ -4,7 +4,7 @@ import * as React from 'react';
 import './App.css';
 import KanbanBoard from './components/kabanBoard';
 
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import {
   Dialog,
   DialogBackdrop,
@@ -22,7 +22,7 @@ import {
   XMarkIcon,
 } from '@heroicons/react/24/outline'
 import { ChevronDownIcon, MagnifyingGlassIcon } from '@heroicons/react/20/solid'
-import tasksHook from './hooks/tasksHook';
+import TasksHook from './hooks/tasksHook';
 import filterCardHook from './hooks/filterCardHook';
 import Filter from './components/filter';
 
@@ -39,42 +39,28 @@ const classNames = (...classes: any) => {
 }
 
 const App = () => {
-
-  const [data, setData] = useState(null);
-  useEffect(() => {
-    fetch("https://dog.ceo/api/breeds/image/random")
-      .then((resp) => resp.json())
-      .then((apiData) => {
-        setData(apiData.message)
-      });
-  }, []);
-
-
-  const tasks = tasksHook().getTasks();
-  const groupedTasks = tasksHook().groupByExecutionStatus(tasks)
-
   const [sidebarOpen, setSidebarOpen] = useState(false)
-  const [tasksByColumns, setTasksByColumns] = useState(groupedTasks)
+  const [search, setSearch] = useState('')
 
   const handleChange = (e: any) => {
-    const filteradTasks = findCard(e.target.value);
-    const groupedTasks = tasksHook().groupByExecutionStatus(filteradTasks)
-    setTasksByColumns(groupedTasks)
+    // const filteradTasks = findCard(e.target.value);
+    setSearch(e.target.value)
+    // setTasksByColumns(groupedTasks)
   };
 
-  const findCard = (substring: string) => {
-    const result = filterCardHook().searchBy(tasks, substring);
-    return result
-  }
+  // const findCard = (substring: string) => {
+  //   const result = filterCardHook().searchBy(tasks, substring);
+  //   return result
+  // }
 
   const handleFilterSelected = ([target, value]: [string, string]) => {
-    const result = filterCardHook().filterBy(tasks, target, value)
-    const groupedTasks = tasksHook().groupByExecutionStatus(result)
-    setTasksByColumns(groupedTasks)
+    // const result = filterCardHook().filterBy(tasks, target, value)
+    // const groupedTasks = TasksHook().groupByExecutionStatus(result)
+    // setTasksByColumns(groupedTasks)
   }
 
   const resetFilter = () => {
-    setTasksByColumns(groupedTasks)
+    // setTasksByColumns(groupedTasks)
   }
 
   return (
@@ -233,8 +219,7 @@ const App = () => {
           </div>
 
           <main className="overflow-hidden fixed bottom-0 left-20 top-16 w-3/4 border-r border-gray-200 px-4 py-6 sm:px-6 lg:px-8 xl:block">
-            <KanbanBoard
-              tasksByColumns={tasksByColumns} />
+            <KanbanBoard search={search} />
           </main>
         </div>
 
@@ -267,3 +252,7 @@ const App = () => {
 }
 
 export default App;
+function setTasksByColumns(groupedTasks: any) {
+  throw new Error('Function not implemented.');
+}
+

@@ -10,8 +10,7 @@ type task = {
 }
 type tasks = Array<task>
 
-const tasksHook = () => {
-
+const TasksHook = () => {
     const getTasks = (args?: any) => {
         return [
             {
@@ -108,7 +107,7 @@ const tasksHook = () => {
     }
 
     const groupByExecutionStatus = (tasks: tasks) => {
-        return tasks.reduce((acc: any, task) => {
+        return tasks.reduce((acc: any, task: any) => {
             task.status === 'scheduled'
                 ? acc = { ...acc, 'scheduled': [...acc['scheduled'], task] }
                 : acc = { ...acc, 'executed': [...acc['executed'], task] }
@@ -120,4 +119,4 @@ const tasksHook = () => {
     return { getTasks, groupByExecutionStatus }
 }
 
-export default tasksHook
+export default TasksHook

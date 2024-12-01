@@ -2,12 +2,12 @@ import * as React from "react";
 import '../css/KanbanBoard.css';
 import KanbanColumns from "./kabanColumns";
 
-const KanbanBoard = ({ tasksByColumns }: { tasksByColumns: any }) => {
+const KanbanBoard = ({ search }: { search: string }) => {
     return (
         <div className="kanban-grid">
             <KanbanColumns
-                columnsMap={[['A ser Executada', 'scheduled'], ['Executada', 'executed']]}
-                tasksByColumns={tasksByColumns} />
+                search={search}
+                columnsMap={[['A ser Executada', 'scheduled'], ['Executada', 'executed']]} />
         </div>
     );
 }
