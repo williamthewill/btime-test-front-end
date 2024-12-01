@@ -1,6 +1,6 @@
 import '../css/Modal.css'
 
-const ContentModal = ({ title, description, files }: { title: string, description: string, files: string }) => {
+const ContentModal = ({ title, description, files }: { title: string, description: string, files: { [key: string]: any } }) => {
 
     return (
         <div className="modal-content">
@@ -11,7 +11,11 @@ const ContentModal = ({ title, description, files }: { title: string, descriptio
                 <h3 className="text-base font-semibold text-gray-900" id="modal-title">{title}</h3>
                 <div className="mt-2">
                     <p className="text-sm text-gray-500">{description}</p>
-                    <p className="text-sm text-gray-500">{files}</p>
+                    <div className="text-sm text-gray-500 w-[40%]">
+                        {files.img.map((img: string, i: number) =>
+                            <img src={img} key={i} />
+                        )}
+                    </div>
                 </div>
             </div>
         </div>)

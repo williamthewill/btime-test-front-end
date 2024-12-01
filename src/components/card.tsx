@@ -1,17 +1,7 @@
 import { useState } from 'react';
 import Modal from './modal';
 import ContentModal from './contentModal';
-
-type task = {
-    id: number,
-    taskId: number,
-    name: string;
-    priority: string;
-    executionDate: string;
-    executionPlace: string;
-    description: string;
-    files: string;
-}
+import { task } from '../lib/tasks';
 
 const Card = ({ task }: { task: task }) => {
     const [showModal, setShowModal] = useState(false);

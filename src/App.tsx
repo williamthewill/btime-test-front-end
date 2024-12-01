@@ -22,8 +22,6 @@ import {
   XMarkIcon,
 } from '@heroicons/react/24/outline'
 import { ChevronDownIcon, MagnifyingGlassIcon } from '@heroicons/react/20/solid'
-import TasksHook from './hooks/tasksHook';
-import filterCardHook from './hooks/filterCardHook';
 import Filter from './components/filter';
 
 const navigation = [
@@ -34,7 +32,7 @@ const userNavigation = [
   { name: 'Sign out', href: '#' },
 ]
 
-const classNames = (...classes: any) => {
+const classNames = (...classes: Array<string>) => {
   return classes.filter(Boolean).join(' ')
 }
 
@@ -87,7 +85,7 @@ const App = () => {
                   />
                 </div>
                 <nav className="flex flex-1 flex-col">
-                  <ul role="list" className="-mx-2 flex-1 space-y-1">
+                  <ul className="-mx-2 flex-1 space-y-1">
                     {navigation.map((item) => (
                       <li key={item.name}>
                         <a
@@ -121,7 +119,7 @@ const App = () => {
             />
           </div>
           <nav className="mt-8">
-            <ul role="list" className="flex flex-col items-center space-y-1">
+            <ul className="flex flex-col items-center space-y-1">
               {navigation.map((item) => (
                 <li key={item.name}>
                   <a
@@ -244,7 +242,4 @@ const App = () => {
 }
 
 export default App;
-function setTasksByColumns(groupedTasks: any) {
-  throw new Error('Function not implemented.');
-}
 

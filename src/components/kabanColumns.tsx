@@ -1,43 +1,8 @@
 import * as React from "react";
 import Card from "./card";
-import { useState, useEffect } from 'react';
-import { gql, useQuery } from "@apollo/client";
-
-type tasks = {
-    id: number,
-    title: string;
-    priority: string;
-    dateExecution: string;
-    localExecution: string;
-    description: string;
-    imagem: string;
-}[]
-
-
-const TASKS_PAGINATED = gql`
-        query TasksPaginated($first: Int, $after: String, $substring: String, $filter: String, $toCombine: String, $isSearch: Boolean, $isFilter: Boolean){
-          getPaginated(first: $first, after: $after, substring: $substring, filter: $filter, toCombine: $toCombine, isSearch: $isSearch, isFilter: $isFilter) {
-            pageInfo {
-              endCursor
-              hasNextPage
-            }
-            edges {
-              node {
-                id
-                task_id
-                name
-                priority
-                description
-                execution_date
-                execution_place
-                files
-                status
-              }
-            }
-          }
-        }
-      `;
-
+import { useEffect } from 'react';
+import { useQuery } from "@apollo/client";
+import { task, TASKS_PAGINATED } from "../lib/tasks";
 
 const KanbanColumns = ({ columnsMap, search, filter }: { columnsMap: Array<[string, string]>, search: string, filter: { target: string, value: string } }) => {
     let { data, loading, error, fetchMore, refetch } = useQuery(TASKS_PAGINATED, { variables: { first: 10 } });
@@ -88,7 +53,7 @@ const KanbanColumns = ({ columnsMap, search, filter }: { columnsMap: Array<[stri
                         <hr className="custom-hr" />
                         <ul className="task-list max-h-[100%] overflow-auto">
                             {
-                                data?.getPaginated?.edges.map(({ node: task }: any) =>
+                                data?.getPaginated?.edges.map(({ node: task }: { node: task }) =>
                                     task.status === attName ?
                                         < li key={task.id}>
                                             <Card

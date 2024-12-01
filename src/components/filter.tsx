@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useState } from 'react'
 
-const Filter = ({ filters, handleFilterSelected }: { filters: any, handleFilterSelected: any }) => {
+const Filter = ({ filters, handleFilterSelected }: { filters: { [key: string]: string[] }, handleFilterSelected: any }) => {
 
     const [selectedFilter, setSelectedFilter] = useState('')
 
