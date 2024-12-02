@@ -36,3 +36,13 @@ If can you start project by Docker run this commands
 In the project directory, you can run:
 ### `docker build -t btime-test-front .`
 ### `docker run -d -p 3000:3000 btime-test-front:latest`
+
+## Access Back-End by hosting
+
+To acelerate processes for testing front-end project you can access api by hosting 
+
+>To access Playground
+[`https://beautiful-little-unau.gigalixirapp.com/api/graphql`](https://beautiful-little-unau.gigalixirapp.com/api/graphiql)
+>
+>To access API
+[`https://beautiful-little-unau.gigalixirapp.com/api/graphql`](https://beautiful-little-unau.gigalixirapp.com/api/graphql)
