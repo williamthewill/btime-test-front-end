@@ -12,7 +12,7 @@ it("renders without error", async () => {
     executionDate: '21/09/1992',
     executionPlace: 'São Paulo',
     description: 'description test',
-    files: `{img:["https://raw.githubusercontent.com/williamthewill/btime-test-back-end/refs/heads/master/image-1.png"]}`,
+    files: { img: ["https://raw.githubusercontent.com/williamthewill/btime-test-back-end/refs/heads/master/image-1.png"] },
     status: 'scheduled',
   }
 

@@ -8,7 +8,7 @@ export type task = {
   executionDate: string;
   executionPlace: string;
   description: string;
-  files: string;
+  files: { img: Array<string> };
   status: string;
 }
 export type tasks = Array<task>
@@ -29,7 +29,9 @@ query TasksPaginated($first: Int, $after: String, $substring: String, $filter: S
         description
         execution_date
         execution_place
-        files
+        files {
+          img
+        }
         status
       }
     }

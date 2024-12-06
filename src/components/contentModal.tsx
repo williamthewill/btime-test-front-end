@@ -1,6 +1,7 @@
 import '../css/Modal.css'
 
-const ContentModal = ({ title, description, files }: { title: string, description: string, files: string }) => {
+const ContentModal = ({ title, description, files }: { title: string, description: string, files: { img: Array<string> } }) => {
+    console.log(files)
     return (
         <div className="modal-content">
             <div className="mx-auto flex size-12 shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:size-10">
@@ -11,7 +12,7 @@ const ContentModal = ({ title, description, files }: { title: string, descriptio
                 <div className="mt-2">
                     <p className="text-sm text-gray-500">{description}</p>
                     <div className="text-sm text-gray-500 w-[40%]">
-                        {JSON.parse(files).img.map((img: string, i: number) =>
+                        {files.img.map((img: string, i: number) =>
                             <img src={img} key={i} />
                         )}
                     </div>
